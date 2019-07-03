@@ -21,7 +21,7 @@ export class AppHeader {
           <ion-title>
             <img
               id="title_logo"
-              src="/cuenca-shipping/assets/img/cuenca-logo.png"
+              src="/assets/img/cuenca-logo.png"
               width="25"
             />
             <span>{ this.ionTitle }</span>

@@ -88,7 +88,7 @@ export class AppStep1 {
         <ion-item>
           <ion-label class="ion-text-right">
             <img
-              src="/cuenca-shipping/assets/img/powered_by_google.png"
+              src="/assets/img/powered_by_google.png"
               width="100"
             />
           </ion-label>
