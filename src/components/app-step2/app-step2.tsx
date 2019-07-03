@@ -75,6 +75,28 @@ export class AppStep2 {
     });
   }
 
+  async changeMapGeolocation(){
+    try{
+      var optionsGeolocation = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      };
+      const geolocation = await Geolocation.getCurrentPosition(optionsGeolocation);
+      const coords = geolocation.coords;
+      let latLng = new google.maps.LatLng(coords.latitude, coords.longitude);
+      this.map.setCenter(latLng);
+      this.map.setZoom(19);
+      this.marker = new google.maps.Marker({
+        position: latLng,
+        map: this.map
+      });
+    this.setAddressRender(latLng);
+    }catch{
+      this.map.setZoom(19);
+    }
+  }
+
   setAddressRender(location){
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode({
@@ -86,24 +108,6 @@ export class AppStep2 {
           }
       }
     });
-  }
-
-  async changeMapGeolocation(){
-    var optionsGeolocation = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0
-    };
-    const geolocation = await Geolocation.getCurrentPosition(optionsGeolocation);
-    const coords = geolocation.coords;
-    let latLng = new google.maps.LatLng(coords.latitude, coords.longitude);
-    this.map.setCenter(latLng);
-    this.map.setZoom(19);
-    this.marker = new google.maps.Marker({
-      position: latLng,
-      map: this.map
-    });
-    this.setAddressRender(latLng);
   }
 
   onInputAddressDetail = (e) => {
