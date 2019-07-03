@@ -9,53 +9,27 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
-  interface MyComponent {
-    /**
-    * The first name
-    */
-    'first': string;
-    /**
-    * The last name
-    */
-    'last': string;
-    /**
-    * The middle name
-    */
-    'middle': string;
-  }
+  interface CuencaShipping {}
 }
 
 declare global {
 
 
-  interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {}
-  var HTMLMyComponentElement: {
-    prototype: HTMLMyComponentElement;
-    new (): HTMLMyComponentElement;
+  interface HTMLCuencaShippingElement extends Components.CuencaShipping, HTMLStencilElement {}
+  var HTMLCuencaShippingElement: {
+    prototype: HTMLCuencaShippingElement;
+    new (): HTMLCuencaShippingElement;
   };
   interface HTMLElementTagNameMap {
-    'my-component': HTMLMyComponentElement;
+    'cuenca-shipping': HTMLCuencaShippingElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface MyComponent extends JSXBase.HTMLAttributes<HTMLMyComponentElement> {
-    /**
-    * The first name
-    */
-    'first'?: string;
-    /**
-    * The last name
-    */
-    'last'?: string;
-    /**
-    * The middle name
-    */
-    'middle'?: string;
-  }
+  interface CuencaShipping extends JSXBase.HTMLAttributes<HTMLCuencaShippingElement> {}
 
   interface IntrinsicElements {
-    'my-component': MyComponent;
+    'cuenca-shipping': CuencaShipping;
   }
 }
 
