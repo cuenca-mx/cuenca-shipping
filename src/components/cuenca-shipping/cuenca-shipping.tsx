@@ -33,8 +33,8 @@ export class MyComponent {
     return (
       <ion-app>
         <ion-router useHash={false}>
-          <ion-route component="app-step1" />
-          <ion-route component="app-step2" />
+          <ion-route url={window.location.pathname} component="app-step1" />
+          <ion-route url={window.location.pathname} component="app-step2" />
         </ion-router>
         <ion-nav animated={false}/>
       </ion-app>

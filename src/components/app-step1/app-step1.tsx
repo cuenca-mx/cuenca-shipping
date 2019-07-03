@@ -11,9 +11,9 @@ export class AppStep1 {
 
   entered_address: string='';
   timeout_for_req: any;
-  toastController: any;
 
   nav: any;
+  toastController: any;
 
   componentDidLoad(){
     this.nav = this.element.parentElement;
@@ -88,7 +88,7 @@ export class AppStep1 {
         <ion-item>
           <ion-label class="ion-text-right">
             <img
-              src="assets/img/powered_by_google_on_white.png"
+              src="/cuenca-shipping/assets/img/powered_by_google.png"
               width="100"
             />
           </ion-label>

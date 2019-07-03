@@ -36,27 +36,29 @@ export class AppStep2 {
       map: this.map
     });
 
-    var _this = this;
-    google.maps.event.addListener(this.map, 'drag', function () {
-      _this.marker.setPosition(this.getCenter());
+    this.map.addListener('drag', () => {
+      this.marker.setPosition(this.map.getCenter());
     });
 
-    google.maps.event.addListener(this.map, 'dragend', function () {
-      _this.setAddressRender(this.getCenter());
+    this.map.addListener('dragend', () => {
+      this.setAddressRender(this.map.getCenter());
     });
   }
 
-  async changeMapOption(){
+  async loadingShow(){
     this.loadingController = document.querySelector('ion-loading-controller');
     this.loading = await this.loadingController.create();
     await this.loading.present();
+  }
+
+  async changeMapOption(){
+    await this.loadingShow();
     const option = this.selected_option;
     if (option.type == "prediction"){
-      await this.changeMapPrediction(option.value.place_id);
+      this.changeMapPrediction(option.value.place_id);
     }else{
-      await this.changeMapGeolocation();
+      this.changeMapGeolocation();
     }
-    await this.loading.dismiss();
   }
 
   changeMapPrediction(place_id) {
@@ -71,6 +73,7 @@ export class AppStep2 {
           map: this.map
         });
         this.address = place.formatted_address;
+        this.loading.dismiss();
       }
     });
   }
@@ -91,10 +94,9 @@ export class AppStep2 {
         position: latLng,
         map: this.map
       });
-    this.setAddressRender(latLng);
-    }catch{
-      this.map.setZoom(19);
-    }
+      this.setAddressRender(latLng);
+    }catch{}
+    this.loading.dismiss();
   }
 
   setAddressRender(location){
@@ -117,7 +119,10 @@ export class AppStep2 {
   render() {
     return [
       <ion-loading-controller></ion-loading-controller>,
-      <app-header title="Ajustar Ubicacion"></app-header>,
+      <app-header
+        title="Ajustar Ubicacion"
+        back_buttom={true}
+      ></app-header>,
       <ion-content>
         <div id="map"></div>
       </ion-content>,

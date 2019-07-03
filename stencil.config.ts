@@ -5,7 +5,7 @@ export const config: Config = {
   outputTargets: [
     {
       type: 'dist',
-      copy: [{ src: 'assets' }],
+      copy: [{ src: 'assets', dest: '../assets' }],
       esmLoaderPath: '../loader'
     },
     {
@@ -13,6 +13,7 @@ export const config: Config = {
     },
     {
       type: 'www',
+      copy: [{ src: 'assets', dest: 'cuenca-shipping/assets' }],
       serviceWorker: null // disable service workers
     }
   ],
