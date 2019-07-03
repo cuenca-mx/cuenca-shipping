@@ -74,7 +74,7 @@ export class AppStep1 {
   render() {
     return [
       <ion-toast-controller></ion-toast-controller>,
-      <app-header title="Cuenca"></app-header>,
+      <app-header ion-title="Cuenca"></app-header>,
 
       <ion-content class="ion-padding">
         <ion-item>

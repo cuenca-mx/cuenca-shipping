@@ -120,8 +120,8 @@ export class AppStep2 {
     return [
       <ion-loading-controller></ion-loading-controller>,
       <app-header
-        title="Ajustar Ubicacion"
-        back_buttom={true}
+        ion-title="Ajustar Ubicacion"
+        back-buttom={true}
       ></app-header>,
       <ion-content>
         <div id="map"></div>

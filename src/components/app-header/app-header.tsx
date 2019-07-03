@@ -5,14 +5,14 @@ import { Component, Prop, h } from '@stencil/core';
   styleUrl: 'app-header.css'
 })
 export class AppHeader {
-  @Prop() title: string;
-  @Prop() back_buttom: boolean;
+  @Prop() ionTitle: string;
+  @Prop() backButtom: boolean;
 
   render() {
     return [
       <ion-header>
         <ion-toolbar color="primary">
-          {this.back_buttom
+          {this.backButtom
             ? <ion-buttons slot="start">
                 <ion-back-button default-href="/"></ion-back-button>
               </ion-buttons>
@@ -24,7 +24,7 @@ export class AppHeader {
               src="/cuenca-shipping/assets/img/cuenca-logo.png"
               width="25"
             />
-            <span>{ this.title }</span>
+            <span>{ this.ionTitle }</span>
           </ion-title>
         </ion-toolbar>
       </ion-header>,

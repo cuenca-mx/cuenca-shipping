@@ -7,12 +7,29 @@
 
 ## Properties
 
-| Property | Attribute | Description     | Type     | Default     |
-| -------- | --------- | --------------- | -------- | ----------- |
-| `first`  | `first`   | The first name  | `string` | `undefined` |
-| `last`   | `last`    | The last name   | `string` | `undefined` |
-| `middle` | `middle`  | The middle name | `string` | `undefined` |
+| Property | Attribute | Description | Type     | Default     |
+| -------- | --------- | ----------- | -------- | ----------- |
+| `apiKey` | `api-key` |             | `string` | `undefined` |
 
+
+## Dependencies
+
+### Depends on
+
+- ion-app
+- ion-router
+- ion-route
+- ion-nav
+
+### Graph
+```mermaid
+graph TD;
+  cuenca-shipping --> ion-app
+  cuenca-shipping --> ion-router
+  cuenca-shipping --> ion-route
+  cuenca-shipping --> ion-nav
+  style cuenca-shipping fill:#f9f,stroke:#333,stroke-width:4px
+```
 
 ----------------------------------------------
 

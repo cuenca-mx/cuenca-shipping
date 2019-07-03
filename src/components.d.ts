@@ -10,8 +10,8 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 export namespace Components {
   interface AppHeader {
-    'back_buttom': boolean;
-    'title': string;
+    'backButtom': boolean;
+    'ionTitle': string;
   }
   interface AppStep1 {}
   interface AppStep2 {
@@ -58,8 +58,8 @@ declare global {
 
 declare namespace LocalJSX {
   interface AppHeader extends JSXBase.HTMLAttributes<HTMLAppHeaderElement> {
-    'back_buttom'?: boolean;
-    'title'?: string;
+    'backButtom'?: boolean;
+    'ionTitle'?: string;
   }
   interface AppStep1 extends JSXBase.HTMLAttributes<HTMLAppStep1Element> {}
   interface AppStep2 extends JSXBase.HTMLAttributes<HTMLAppStep2Element> {
