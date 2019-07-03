@@ -1,31 +1,35 @@
-import { Component, h } from '@stencil/core';
+import { Component, Element, Listen, h } from '@stencil/core';
 
 @Component({
   tag: 'cuenca-shipping',
   styleUrl: 'cuenca-shipping.css'
 })
 export class MyComponent {
+  @Element() element: HTMLElement;
+
+  nav: any;
+
+  componentDidLoad(){
+    this.nav = this.element.querySelector('ion-nav');
+  }
+
+  @Listen('optionSelect')
+  todoCompletedHandler(event: CustomEvent) {
+    const option = event.detail;
+    console.log(option)
+    this.nav.push('app-step2');
+  }
+
   render() {
     return (
-      <ion-tabs>
-        <ion-tab tab="tab-step1" component="app-step1"></ion-tab>
-
-        <ion-tab tab="tab-step2">
-          <app-header title="Ajustar Ubicacion"></app-header>
-        </ion-tab>
-
-        <ion-tab-bar slot="bottom">
-          <ion-tab-button tab="tab-step1">
-            <ion-icon name="home"></ion-icon>
-            <ion-label>Paso 1</ion-label>
-          </ion-tab-button>
-
-          <ion-tab-button tab="tab-step2">
-            <ion-icon name="map"></ion-icon>
-            <ion-label>Paso 2</ion-label>
-          </ion-tab-button>
-        </ion-tab-bar>
-      </ion-tabs>
+      <ion-app>
+        <ion-router >
+          <ion-route-redirect from="/" to="/step1" />
+          <ion-route url="/step1" component="app-step1" />
+          <ion-route url="/step2" component="app-step2" />
+        </ion-router>
+        <ion-nav animated={false}/>
+      </ion-app>
     )
   }
 }

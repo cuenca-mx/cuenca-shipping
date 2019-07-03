@@ -4,7 +4,7 @@ import { Component, Prop, h } from '@stencil/core';
   tag: 'app-header',
   styleUrl: 'app-header.css'
 })
-export class AppStep1 {
+export class AppHeader {
   @Prop() title: string;
 
   render() {
@@ -14,7 +14,7 @@ export class AppStep1 {
           <ion-title>
             <img
               id="title_logo"
-              src="https://cuenca.com/img/homePics/Logo.png"
+              src="assets/img/cuenca-logo.png"
               width="25"
             />
             <span>{ this.title }</span>

@@ -13,6 +13,7 @@ export namespace Components {
     'title': string;
   }
   interface AppStep1 {}
+  interface AppStep2 {}
   interface CuencaShipping {}
 }
 
@@ -31,6 +32,12 @@ declare global {
     new (): HTMLAppStep1Element;
   };
 
+  interface HTMLAppStep2Element extends Components.AppStep2, HTMLStencilElement {}
+  var HTMLAppStep2Element: {
+    prototype: HTMLAppStep2Element;
+    new (): HTMLAppStep2Element;
+  };
+
   interface HTMLCuencaShippingElement extends Components.CuencaShipping, HTMLStencilElement {}
   var HTMLCuencaShippingElement: {
     prototype: HTMLCuencaShippingElement;
@@ -39,6 +46,7 @@ declare global {
   interface HTMLElementTagNameMap {
     'app-header': HTMLAppHeaderElement;
     'app-step1': HTMLAppStep1Element;
+    'app-step2': HTMLAppStep2Element;
     'cuenca-shipping': HTMLCuencaShippingElement;
   }
 }
@@ -47,12 +55,16 @@ declare namespace LocalJSX {
   interface AppHeader extends JSXBase.HTMLAttributes<HTMLAppHeaderElement> {
     'title'?: string;
   }
-  interface AppStep1 extends JSXBase.HTMLAttributes<HTMLAppStep1Element> {}
+  interface AppStep1 extends JSXBase.HTMLAttributes<HTMLAppStep1Element> {
+    'onOptionSelect'?: (event: CustomEvent<any>) => void;
+  }
+  interface AppStep2 extends JSXBase.HTMLAttributes<HTMLAppStep2Element> {}
   interface CuencaShipping extends JSXBase.HTMLAttributes<HTMLCuencaShippingElement> {}
 
   interface IntrinsicElements {
     'app-header': AppHeader;
     'app-step1': AppStep1;
+    'app-step2': AppStep2;
     'cuenca-shipping': CuencaShipping;
   }
 }
