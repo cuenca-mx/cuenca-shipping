@@ -6,17 +6,43 @@ import { Component, Element, State, Event, EventEmitter, h } from '@stencil/core
 })
 export class AppStep1 {
   @Element() element: HTMLElement;
+  @Event() optionSelect: EventEmitter;
+
   @State() predictions: any[] = [];
 
   entered_address: string='';
   timeout_for_req: any;
+  toastController: any;
 
-  @Event() optionSelect: EventEmitter;
+  componentDidLoad(){
+    this.toastController = document.querySelector(
+      'ion-toast-controller'
+    );
+  }
+
+  async toastErrorMessage(){
+    const toast = await this.toastController.create({
+      header: 'Ocurrio un error, intente de nuevo.'
+    });
+    return await toast.present();
+  }
 
   getQueryPredictions(){
     this.predictions = [];
     if (this.entered_address){
-      this.selectPrediction('test');
+      var service = new google.maps.places.AutocompleteService();
+      service.getQueryPredictions({
+        input: this.entered_address
+      }, (predictions, status) => {
+        if (
+          status != google.maps.places.PlacesServiceStatus.ZERO_RESULTS &&
+          status != google.maps.places.PlacesServiceStatus.OK
+        ) {
+          this.toastErrorMessage();
+          return;
+        }
+        this.predictions = predictions || [];
+      });
     }
   }
 
@@ -41,6 +67,7 @@ export class AppStep1 {
 
   render() {
     return [
+      <ion-toast-controller></ion-toast-controller>,
       <app-header title="Cuenca"></app-header>,
 
       <ion-content class="ion-padding">

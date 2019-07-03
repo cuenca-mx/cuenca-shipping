@@ -25,6 +25,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@ionic/core": "^4.6.0"
+    "@ionic/core": "^4.6.0",
+    "@types/googlemaps": "^3.36.6"
   }
 }

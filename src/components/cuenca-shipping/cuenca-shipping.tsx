@@ -1,4 +1,4 @@
-import { Component, Element, Listen, h } from '@stencil/core';
+import { Component, Element, Listen, Prop, h } from '@stencil/core';
 
 @Component({
   tag: 'cuenca-shipping',
@@ -6,11 +6,13 @@ import { Component, Element, Listen, h } from '@stencil/core';
 })
 export class MyComponent {
   @Element() element: HTMLElement;
+  @Prop() apiKey: string;
 
   nav: any;
 
   componentDidLoad(){
     this.nav = this.element.querySelector('ion-nav');
+    this.injectGoogleMapsApiScript();
   }
 
   @Listen('optionSelect')
@@ -18,6 +20,23 @@ export class MyComponent {
     const option = event.detail;
     console.log(option)
     this.nav.push('app-step2');
+  }
+
+  injectGoogleMapsApiScript(){
+    const exists_script = document.body.querySelector('script#googlemaps');
+    if (!exists_script){
+      let script = document.createElement('script');
+      script.id = 'googlemaps';
+
+      const uri_gmaps = "https://maps.googleapis.com/maps/api/js?";
+      if(this.apiKey){
+        script.src = uri_gmaps + 'key=' + this.apiKey + '&libraries=places';
+      } else {
+        script.src = uri_gmaps + 'libraries=places';       
+      }
+      
+      document.body.appendChild(script);
+    }
   }
 
   render() {
