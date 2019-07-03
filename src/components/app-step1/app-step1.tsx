@@ -1,4 +1,4 @@
-import { Component, Element, State, Event, EventEmitter, h } from '@stencil/core';
+import { Component, Element, State, h } from '@stencil/core';
 
 @Component({
   tag: 'app-step1',
@@ -6,7 +6,6 @@ import { Component, Element, State, Event, EventEmitter, h } from '@stencil/core
 })
 export class AppStep1 {
   @Element() element: HTMLElement;
-  @Event() optionSelect: EventEmitter;
 
   @State() predictions: any[] = [];
 
@@ -14,7 +13,10 @@ export class AppStep1 {
   timeout_for_req: any;
   toastController: any;
 
+  nav: any;
+
   componentDidLoad(){
+    this.nav = this.element.parentElement;
     this.toastController = document.querySelector(
       'ion-toast-controller'
     );
@@ -58,11 +60,15 @@ export class AppStep1 {
   };
 
   selectPrediction(prediction){
-    this.optionSelect.emit({type: "prediction", value: prediction});
+    this.nav.push('app-step2', {
+      selected_option: {type: "prediction", value: prediction}
+    });
   }
 
   selectGeolocation(){
-    this.optionSelect.emit({type: "geolocation"});
+    this.nav.push('app-step2', {
+      selected_option: {type: "geolocation"}
+    });
   }
 
   render() {

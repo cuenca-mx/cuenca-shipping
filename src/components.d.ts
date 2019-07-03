@@ -13,7 +13,9 @@ export namespace Components {
     'title': string;
   }
   interface AppStep1 {}
-  interface AppStep2 {}
+  interface AppStep2 {
+    'selected_option': object;
+  }
   interface CuencaShipping {
     'apiKey': string;
   }
@@ -57,10 +59,10 @@ declare namespace LocalJSX {
   interface AppHeader extends JSXBase.HTMLAttributes<HTMLAppHeaderElement> {
     'title'?: string;
   }
-  interface AppStep1 extends JSXBase.HTMLAttributes<HTMLAppStep1Element> {
-    'onOptionSelect'?: (event: CustomEvent<any>) => void;
+  interface AppStep1 extends JSXBase.HTMLAttributes<HTMLAppStep1Element> {}
+  interface AppStep2 extends JSXBase.HTMLAttributes<HTMLAppStep2Element> {
+    'selected_option'?: object;
   }
-  interface AppStep2 extends JSXBase.HTMLAttributes<HTMLAppStep2Element> {}
   interface CuencaShipping extends JSXBase.HTMLAttributes<HTMLCuencaShippingElement> {
     'apiKey'?: string;
   }

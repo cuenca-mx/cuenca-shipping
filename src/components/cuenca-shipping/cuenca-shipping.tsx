@@ -1,4 +1,4 @@
-import { Component, Element, Listen, Prop, h } from '@stencil/core';
+import { Component, Element, Prop, h } from '@stencil/core';
 
 @Component({
   tag: 'cuenca-shipping',
@@ -8,18 +8,8 @@ export class MyComponent {
   @Element() element: HTMLElement;
   @Prop() apiKey: string;
 
-  nav: any;
-
   componentDidLoad(){
-    this.nav = this.element.querySelector('ion-nav');
     this.injectGoogleMapsApiScript();
-  }
-
-  @Listen('optionSelect')
-  todoCompletedHandler(event: CustomEvent) {
-    const option = event.detail;
-    console.log(option)
-    this.nav.push('app-step2');
   }
 
   injectGoogleMapsApiScript(){
@@ -42,10 +32,9 @@ export class MyComponent {
   render() {
     return (
       <ion-app>
-        <ion-router >
-          <ion-route-redirect from="/" to="/step1" />
-          <ion-route url="/step1" component="app-step1" />
-          <ion-route url="/step2" component="app-step2" />
+        <ion-router useHash={false}>
+          <ion-route component="app-step1" />
+          <ion-route component="app-step2" />
         </ion-router>
         <ion-nav animated={false}/>
       </ion-app>
