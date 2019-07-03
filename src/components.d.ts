@@ -9,11 +9,27 @@ import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 
 
 export namespace Components {
+  interface AppHeader {
+    'title': string;
+  }
+  interface AppStep1 {}
   interface CuencaShipping {}
 }
 
 declare global {
 
+
+  interface HTMLAppHeaderElement extends Components.AppHeader, HTMLStencilElement {}
+  var HTMLAppHeaderElement: {
+    prototype: HTMLAppHeaderElement;
+    new (): HTMLAppHeaderElement;
+  };
+
+  interface HTMLAppStep1Element extends Components.AppStep1, HTMLStencilElement {}
+  var HTMLAppStep1Element: {
+    prototype: HTMLAppStep1Element;
+    new (): HTMLAppStep1Element;
+  };
 
   interface HTMLCuencaShippingElement extends Components.CuencaShipping, HTMLStencilElement {}
   var HTMLCuencaShippingElement: {
@@ -21,14 +37,22 @@ declare global {
     new (): HTMLCuencaShippingElement;
   };
   interface HTMLElementTagNameMap {
+    'app-header': HTMLAppHeaderElement;
+    'app-step1': HTMLAppStep1Element;
     'cuenca-shipping': HTMLCuencaShippingElement;
   }
 }
 
 declare namespace LocalJSX {
+  interface AppHeader extends JSXBase.HTMLAttributes<HTMLAppHeaderElement> {
+    'title'?: string;
+  }
+  interface AppStep1 extends JSXBase.HTMLAttributes<HTMLAppStep1Element> {}
   interface CuencaShipping extends JSXBase.HTMLAttributes<HTMLCuencaShippingElement> {}
 
   interface IntrinsicElements {
+    'app-header': AppHeader;
+    'app-step1': AppStep1;
     'cuenca-shipping': CuencaShipping;
   }
 }
