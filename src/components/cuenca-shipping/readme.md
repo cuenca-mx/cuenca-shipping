@@ -7,9 +7,12 @@
 
 ## Properties
 
-| Property | Attribute | Description | Type     | Default     |
-| -------- | --------- | ----------- | -------- | ----------- |
-| `apiKey` | `api-key` |             | `string` | `undefined` |
+| Property     | Attribute     | Description | Type     | Default     |
+| ------------ | ------------- | ----------- | -------- | ----------- |
+| `apiKey`     | `api-key`     |             | `string` | `undefined` |
+| `backUrl`    | `back-url`    |             | `string` | `undefined` |
+| `clientId`   | `client-id`   |             | `string` | `undefined` |
+| `clientName` | `client-name` |             | `string` | `undefined` |
 
 
 ## Dependencies

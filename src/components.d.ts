@@ -13,12 +13,21 @@ export namespace Components {
     'backButtom': boolean;
     'ionTitle': string;
   }
-  interface AppStep1 {}
+  interface AppStep1 {
+    'backUrl': string;
+    'clientId': string;
+    'clientName': string;
+  }
   interface AppStep2 {
-    'selected_option': any;
+    'backUrl': string;
+    'clientId': string;
+    'selectedOption': any;
   }
   interface CuencaShipping {
     'apiKey': string;
+    'backUrl': string;
+    'clientId': string;
+    'clientName': string;
   }
 }
 
@@ -61,12 +70,21 @@ declare namespace LocalJSX {
     'backButtom'?: boolean;
     'ionTitle'?: string;
   }
-  interface AppStep1 extends JSXBase.HTMLAttributes<HTMLAppStep1Element> {}
+  interface AppStep1 extends JSXBase.HTMLAttributes<HTMLAppStep1Element> {
+    'backUrl'?: string;
+    'clientId'?: string;
+    'clientName'?: string;
+  }
   interface AppStep2 extends JSXBase.HTMLAttributes<HTMLAppStep2Element> {
-    'selected_option'?: any;
+    'backUrl'?: string;
+    'clientId'?: string;
+    'selectedOption'?: any;
   }
   interface CuencaShipping extends JSXBase.HTMLAttributes<HTMLCuencaShippingElement> {
     'apiKey'?: string;
+    'backUrl'?: string;
+    'clientId'?: string;
+    'clientName'?: string;
   }
 
   interface IntrinsicElements {

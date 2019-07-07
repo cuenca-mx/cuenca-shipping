@@ -1,4 +1,4 @@
-import { Component, Element, Prop, h } from '@stencil/core';
+import { Component, Element, Prop, Watch, h } from '@stencil/core';
 
 @Component({
   tag: 'cuenca-shipping',
@@ -7,9 +7,18 @@ import { Component, Element, Prop, h } from '@stencil/core';
 export class MyComponent {
   @Element() element: HTMLElement;
   @Prop() apiKey: string;
+  @Prop() backUrl: string;
+  @Prop() clientId: string;
+  @Prop() clientName: string;
 
   componentDidLoad(){
     this.injectGoogleMapsApiScript();
+  }
+
+  @Watch('clientId')
+  watchHandler(newValue: boolean, oldValue: boolean) {
+    console.log('The new value of activated is: ', newValue);
+    console.log('The new value of activated is: ', oldValue);
   }
 
   injectGoogleMapsApiScript(){
@@ -33,7 +42,15 @@ export class MyComponent {
     return (
       <ion-app>
         <ion-router useHash={false}>
-          <ion-route url={window.location.pathname} component="app-step1" />
+          <ion-route
+            url={window.location.pathname}
+            component="app-step1"
+            componentProps={{
+              'backUrl': this.backUrl,
+              'clientId': this.clientId,
+              'clientName': this.clientName
+            }} 
+          />
           <ion-route url={window.location.pathname} component="app-step2" />
         </ion-router>
         <ion-nav animated={false}/>

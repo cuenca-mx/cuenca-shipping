@@ -1,4 +1,4 @@
-import { Component, Element, State, h } from '@stencil/core';
+import { Component, Element, Prop, State, h } from '@stencil/core';
 
 @Component({
   tag: 'app-step1',
@@ -6,6 +6,10 @@ import { Component, Element, State, h } from '@stencil/core';
 })
 export class AppStep1 {
   @Element() element: HTMLElement;
+
+  @Prop() backUrl: string;
+  @Prop() clientId: string;
+  @Prop() clientName: string;
 
   @State() predictions: any[] = [];
 
@@ -33,8 +37,12 @@ export class AppStep1 {
     this.predictions = [];
     if (this.entered_address){
       var service = new google.maps.places.AutocompleteService();
-      service.getQueryPredictions({
-        input: this.entered_address
+      service.getPlacePredictions({
+        input: this.entered_address,
+        componentRestrictions: {
+          country: 'mx'
+        },
+        types: ['address']
       }, (predictions, status) => {
         if (
           status != google.maps.places.PlacesServiceStatus.ZERO_RESULTS &&
@@ -61,13 +69,16 @@ export class AppStep1 {
 
   selectPrediction(prediction){
     this.nav.push('app-step2', {
-      selected_option: {type: "prediction", value: prediction}
+      selectedOption: {type: "prediction", value: prediction},
+      backUrl: this.backUrl
     });
   }
 
   selectGeolocation(){
     this.nav.push('app-step2', {
-      selected_option: {type: "geolocation"}
+      selectedOption: {type: "geolocation"},
+      backUrl: this.backUrl,
+      clientId: this.clientId
     });
   }
 
@@ -78,7 +89,12 @@ export class AppStep1 {
 
       <ion-content class="ion-padding">
         <ion-item>
-          <ion-label position="stacked">Añade direccion</ion-label>
+          <ion-label position="stacked">
+            { this.clientName
+              ? <span>Hola {this.clientName}</span>
+              : <span>Añade tu direccion</span>
+            }
+          </ion-label>
           <ion-input
             autofocus
             placeholder="¿Donde entregamos tu tarjeta?"

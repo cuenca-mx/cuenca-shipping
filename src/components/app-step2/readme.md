@@ -7,20 +7,27 @@
 
 ## Properties
 
-| Property          | Attribute         | Description | Type  | Default     |
-| ----------------- | ----------------- | ----------- | ----- | ----------- |
-| `selected_option` | `selected_option` |             | `any` | `undefined` |
+| Property         | Attribute         | Description | Type     | Default     |
+| ---------------- | ----------------- | ----------- | -------- | ----------- |
+| `backUrl`        | `back-url`        |             | `string` | `undefined` |
+| `clientId`       | `client-id`       |             | `string` | `undefined` |
+| `selectedOption` | `selected-option` |             | `any`    | `undefined` |
 
 
 ## Dependencies
 
 ### Depends on
 
+- ion-alert-controller
 - ion-loading-controller
 - [app-header](../app-header)
 - ion-content
+- ion-card
+- ion-card-content
 - ion-footer
 - ion-list
+- ion-row
+- ion-col
 - ion-item
 - ion-label
 - ion-input
@@ -29,11 +36,16 @@
 ### Graph
 ```mermaid
 graph TD;
+  app-step2 --> ion-alert-controller
   app-step2 --> ion-loading-controller
   app-step2 --> app-header
   app-step2 --> ion-content
+  app-step2 --> ion-card
+  app-step2 --> ion-card-content
   app-step2 --> ion-footer
   app-step2 --> ion-list
+  app-step2 --> ion-row
+  app-step2 --> ion-col
   app-step2 --> ion-item
   app-step2 --> ion-label
   app-step2 --> ion-input
@@ -45,6 +57,7 @@ graph TD;
   app-header --> ion-title
   ion-back-button --> ion-icon
   ion-back-button --> ion-ripple-effect
+  ion-card --> ion-ripple-effect
   ion-item --> ion-icon
   ion-item --> ion-ripple-effect
   ion-button --> ion-ripple-effect

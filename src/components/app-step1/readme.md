@@ -5,6 +5,15 @@
 <!-- Auto Generated Below -->
 
 
+## Properties
+
+| Property     | Attribute     | Description | Type     | Default     |
+| ------------ | ------------- | ----------- | -------- | ----------- |
+| `backUrl`    | `back-url`    |             | `string` | `undefined` |
+| `clientId`   | `client-id`   |             | `string` | `undefined` |
+| `clientName` | `client-name` |             | `string` | `undefined` |
+
+
 ## Dependencies
 
 ### Depends on

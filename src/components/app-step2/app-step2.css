@@ -3,3 +3,33 @@ body, html, #map {
 	height: 100%;
 	margin: 0;
 }
+
+ion-card{
+	position: absolute !important;
+    z-index: 999 !important;
+    background: white !important;
+    margin: 5px !important;
+}
+
+ion-input{
+	font-size: 14px !important;
+}
+
+ion-label{
+	font-size: 13px !important;
+	text-overflow: initial !important;
+    overflow: initial !important;
+}
+
+ion-col{
+	padding: 1px;
+}
+
+ion-card-content.card-content-ios{
+	padding-top: 13px !important;
+    padding-bottom: 13px !important;
+}
+
+ion-list.list-ios{
+	margin-bottom: 10px;
+}
