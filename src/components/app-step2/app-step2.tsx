@@ -219,22 +219,28 @@ export class AppStep2 {
   }
 
   async sendAddress(){
-    const request = {
-      method: "POST",
-      headers: new Headers({
-        "Content-Type": "application/json"
-      }),
-      body: JSON.stringify(this.address)
-    };
+    await this.loadingShow();
+    try {
+      const request = {
+        method: "POST",
+        headers: new Headers({
+          "Content-Type": "application/json"
+        }),
+        body: JSON.stringify(this.address)
+      };
 
-    const refresh = await fetch(this.backUrl, request);
-    await refresh.json();
-    if(refresh.status == 200){
-      this.nav.push("app-step3");
-    }else{
+      const refresh = await fetch(this.backUrl, request);
+      await refresh.json();
+      console.log(refresh.status)
+      if(refresh.status == 200){
+        this.nav.push("app-step3");
+      }else{
+        this.toastErrorMessage();
+      }
+    } catch {
       this.toastErrorMessage();
     }
-    
+    this.loading.dismiss();
   }
 
   render() {
