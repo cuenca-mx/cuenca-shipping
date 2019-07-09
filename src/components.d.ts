@@ -23,6 +23,7 @@ export namespace Components {
     'clientId': string;
     'selectedOption': any;
   }
+  interface AppStep3 {}
   interface CuencaShipping {
     'apiKey': string;
     'backUrl': string;
@@ -52,6 +53,12 @@ declare global {
     new (): HTMLAppStep2Element;
   };
 
+  interface HTMLAppStep3Element extends Components.AppStep3, HTMLStencilElement {}
+  var HTMLAppStep3Element: {
+    prototype: HTMLAppStep3Element;
+    new (): HTMLAppStep3Element;
+  };
+
   interface HTMLCuencaShippingElement extends Components.CuencaShipping, HTMLStencilElement {}
   var HTMLCuencaShippingElement: {
     prototype: HTMLCuencaShippingElement;
@@ -61,6 +68,7 @@ declare global {
     'app-header': HTMLAppHeaderElement;
     'app-step1': HTMLAppStep1Element;
     'app-step2': HTMLAppStep2Element;
+    'app-step3': HTMLAppStep3Element;
     'cuenca-shipping': HTMLCuencaShippingElement;
   }
 }
@@ -80,6 +88,7 @@ declare namespace LocalJSX {
     'clientId'?: string;
     'selectedOption'?: any;
   }
+  interface AppStep3 extends JSXBase.HTMLAttributes<HTMLAppStep3Element> {}
   interface CuencaShipping extends JSXBase.HTMLAttributes<HTMLCuencaShippingElement> {
     'apiKey'?: string;
     'backUrl'?: string;
@@ -91,6 +100,7 @@ declare namespace LocalJSX {
     'app-header': AppHeader;
     'app-step1': AppStep1;
     'app-step2': AppStep2;
+    'app-step3': AppStep3;
     'cuenca-shipping': CuencaShipping;
   }
 }

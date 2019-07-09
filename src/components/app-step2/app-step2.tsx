@@ -23,17 +23,30 @@ export class AppStep2 {
   loading: any;
 
   alertController: any;
+  toastController: any;
 
   nav: any;
 
   componentDidLoad(){
-    console.log(this.backUrl)
     this.nav = this.element.parentElement;
     this.alertController = document.querySelector(
       'ion-alert-controller'
     );
+    this.toastController = document.querySelector(
+      'ion-toast-controller'
+    );
     this.initMap();
     this.changeMapOption();
+  }
+
+  async toastErrorMessage(){
+    const toast = await this.toastController.create({
+      header: 'Ocurrio un error, intente de nuevo.',
+      position: 'middle',
+      showCloseButton: true,
+      color: "danger"
+    });
+    return await toast.present();
   }
 
   initMap(){
@@ -213,13 +226,20 @@ export class AppStep2 {
       }),
       body: JSON.stringify(this.address)
     };
+
     const refresh = await fetch(this.backUrl, request);
-    const json = await refresh.json();
-    console.log(json)
+    await refresh.json();
+    if(refresh.status == 200){
+      this.nav.push("app-step3");
+    }else{
+      this.toastErrorMessage();
+    }
+    
   }
 
   render() {
     return [
+      <ion-toast-controller></ion-toast-controller>,
       <ion-alert-controller></ion-alert-controller>,,
       <ion-loading-controller></ion-loading-controller>,
       <app-header

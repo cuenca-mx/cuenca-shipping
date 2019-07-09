@@ -39,12 +39,16 @@ export class MyComponent {
   }
 
   render() {
+    let firstComponent = 'app-step1';
+    if(localStorage.getItem("clientId") == this.clientId){
+      firstComponent = 'app-step3';
+    }
     return (
       <ion-app>
         <ion-router useHash={false}>
           <ion-route
             url={window.location.pathname}
-            component="app-step1"
+            component={firstComponent}
             componentProps={{
               'backUrl': this.backUrl,
               'clientId': this.clientId,
@@ -52,6 +56,7 @@ export class MyComponent {
             }} 
           />
           <ion-route url={window.location.pathname} component="app-step2" />
+          <ion-route url={window.location.pathname} component="app-step3" />
         </ion-router>
         <ion-nav animated={false}/>
       </ion-app>

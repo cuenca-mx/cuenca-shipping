@@ -19,7 +19,7 @@ export class AppStep1 {
   nav: any;
   toastController: any;
 
-  componentDidLoad(){
+  componentWillLoad(){
     this.nav = this.element.parentElement;
     this.toastController = document.querySelector(
       'ion-toast-controller'
