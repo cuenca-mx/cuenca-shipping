@@ -231,7 +231,6 @@ export class AppStep2 {
 
       const refresh = await fetch(this.backUrl, request);
       await refresh.json();
-      console.log(refresh.status)
       if(refresh.status == 200){
         this.nav.push("app-step3");
       }else{
@@ -244,6 +243,7 @@ export class AppStep2 {
   }
 
   render() {
+    const geocoding_gmaps = this.address['geocoding_gmaps'] || {} ;
     return [
       <ion-toast-controller></ion-toast-controller>,
       <ion-alert-controller></ion-alert-controller>,,
@@ -253,13 +253,13 @@ export class AppStep2 {
         back-buttom={true}
       ></app-header>,
       <ion-content>
-        {this.address['formatted_address']
+        {geocoding_gmaps['formatted_address']
           ? <ion-card>
               <ion-card-content>
-                <h4><strong>{ this.address['formatted_address'] }</strong></h4>
+                <h4><strong>{ geocoding_gmaps['formatted_address'] }</strong></h4>
                 <small>
                   Mueva el mapa para ajustar su ubicación.
-                  {this.address['dragend_required']
+                  {geocoding_gmaps['dragend_required']
                     ? <strong>(Obligatorio)</strong>
                     : null
                   }
@@ -300,7 +300,7 @@ export class AppStep2 {
         </ion-list>   
         <ion-button
           expand="full" size="large"
-          disabled={this.address['dragend_required'] ? true : false}
+          disabled={geocoding_gmaps['dragend_required'] ? true : false}
           onClick={ () => this.handleClickEnd()}
         >Finalizar</ion-button>
       </ion-footer>
