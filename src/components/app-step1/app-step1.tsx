@@ -1,4 +1,4 @@
-import { Component, Element, Prop, State, h } from '@stencil/core';
+import { Component, Element, Listen, Prop, State, h } from '@stencil/core';
 
 @Component({
   tag: 'app-step1',
@@ -56,21 +56,11 @@ export class AppStep1 {
     }
   }
 
-  onInputAddress = (e) => {
-    this.entered_address = (e.target as any).value;
-    if(this.timeout_for_req) {
-        clearTimeout(this.timeout_for_req);
-        this.timeout_for_req = null;
-    }
-    this.timeout_for_req = setTimeout(() => {
-      this.getQueryPredictions()
-    }, 650);
-  };
-
   selectPrediction(prediction){
     this.nav.push('app-step2', {
       selectedOption: {type: "prediction", value: prediction},
-      backUrl: this.backUrl
+      backUrl: this.backUrl,
+      clientId: this.clientId
     });
   }
 
@@ -80,6 +70,22 @@ export class AppStep1 {
       backUrl: this.backUrl,
       clientId: this.clientId
     });
+  }
+
+  @Listen('ionChange')
+  ionChangeAddress(event: CustomEvent) {
+    this.entered_address = event.detail.value;
+    if (this.entered_address == ""){
+      this.getQueryPredictions()
+    }else{
+      if(this.timeout_for_req) {
+        clearTimeout(this.timeout_for_req);
+        this.timeout_for_req = null;
+      }
+      this.timeout_for_req = setTimeout(() => {
+        this.getQueryPredictions()
+      }, 650);
+    }
   }
 
   render() {
@@ -97,8 +103,8 @@ export class AppStep1 {
           </ion-label>
           <ion-input
             autofocus
+            clear-input
             placeholder="¿Donde entregamos tu tarjeta?"
-            onInput={e => this.onInputAddress(e)}
           ></ion-input>
         </ion-item>
         <ion-item>

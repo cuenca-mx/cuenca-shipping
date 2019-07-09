@@ -149,7 +149,7 @@ export class AppStep2 {
         const type = components[component]['types'][0];
         if (types.includes(type)){
           if (type == "route"){
-            results[result]['dragendRequired'] = true;
+            results[result]['dragend_required'] = true;
           }
           return results[result]
         }
@@ -168,28 +168,16 @@ export class AppStep2 {
     }
   }
 
-  setAddress(result){
-    console.log(result)
-    const typesNeighborhood = [
-      "political",
-      "sublocality",
-      "sublocality_level_1"
-    ];
+  setAddress(geocoding_gmaps){
     this.address = {
       ...this.address,
-      clientId: this.clientId,
-      latitude: String(result.geometry.location.lat()),
-      longitude: String(result.geometry.location.lng()),
-      neighborhood: this.getTypeForIvoy(result, typesNeighborhood),
-      street: this.getTypeForIvoy(result, ['route']),
-      zipCode: this.getTypeForIvoy(result, ['postal_code']),
-      externalNumber: this.getTypeForIvoy(result, ['street_number']),
-      googleResult: result
+      client_id: this.clientId,
+      geocoding_gmaps: geocoding_gmaps
     }
   }
 
   onInputInterior = (e) => {
-    this.address['internalNumber'] = (e.target as any).value;
+    this.address['internal_number'] = (e.target as any).value;
   }
 
   onInputComment = (e) => {
@@ -197,7 +185,7 @@ export class AppStep2 {
   }
 
   handleClickEnd(){
-    if(!this.address['internalNumber']){
+    if(!this.address['internal_number']){
       const message = `Hemos notado que no has ingresado un 'Numero Interior',
       ¿Deseas que te enviemos tu tarjeta a esta direccion?`;
       this.showAlert({
@@ -231,7 +219,6 @@ export class AppStep2 {
   }
 
   render() {
-    const googleResult = this.address['googleResult'] || {};
     return [
       <ion-alert-controller></ion-alert-controller>,,
       <ion-loading-controller></ion-loading-controller>,
@@ -240,13 +227,13 @@ export class AppStep2 {
         back-buttom={true}
       ></app-header>,
       <ion-content>
-        {googleResult['formatted_address']
+        {this.address['formatted_address']
           ? <ion-card>
               <ion-card-content>
-                <h4><strong>{ googleResult['formatted_address'] }</strong></h4>
+                <h4><strong>{ this.address['formatted_address'] }</strong></h4>
                 <small>
                   Mueva el mapa para ajustar su ubicación.
-                  {googleResult['dragendRequired']
+                  {this.address['dragend_required']
                     ? <strong>(Obligatorio)</strong>
                     : null
                   }
@@ -287,7 +274,7 @@ export class AppStep2 {
         </ion-list>   
         <ion-button
           expand="full" size="large"
-          disabled={googleResult['dragendRequired'] ? true : false}
+          disabled={this.address['dragend_required'] ? true : false}
           onClick={ () => this.handleClickEnd()}
         >Finalizar</ion-button>
       </ion-footer>
