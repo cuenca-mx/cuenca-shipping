@@ -19,6 +19,7 @@
 
  - [app-step1](../app-step1)
  - [app-step2](../app-step2)
+ - [app-step3](../app-step3)
 
 ### Depends on
 
@@ -40,6 +41,7 @@ graph TD;
   ion-back-button --> ion-ripple-effect
   app-step1 --> app-header
   app-step2 --> app-header
+  app-step3 --> app-header
   style app-header fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

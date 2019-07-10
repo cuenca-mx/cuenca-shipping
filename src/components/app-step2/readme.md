@@ -18,6 +18,7 @@
 
 ### Depends on
 
+- ion-toast-controller
 - ion-alert-controller
 - ion-loading-controller
 - [app-header](../app-header)
@@ -36,6 +37,7 @@
 ### Graph
 ```mermaid
 graph TD;
+  app-step2 --> ion-toast-controller
   app-step2 --> ion-alert-controller
   app-step2 --> ion-loading-controller
   app-step2 --> app-header
