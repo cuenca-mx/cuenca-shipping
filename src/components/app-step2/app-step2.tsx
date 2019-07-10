@@ -232,6 +232,7 @@ export class AppStep2 {
       const refresh = await fetch(this.backUrl, request);
       await refresh.json();
       if(refresh.status == 200){
+        localStorage.setItem("clientId", this.clientId);
         this.nav.push("app-step3");
       }else{
         this.toastErrorMessage();

@@ -15,12 +15,6 @@ export class MyComponent {
     this.injectGoogleMapsApiScript();
   }
 
-  @Watch('clientId')
-  watchHandler(newValue: boolean, oldValue: boolean) {
-    console.log('The new value of activated is: ', newValue);
-    console.log('The new value of activated is: ', oldValue);
-  }
-
   injectGoogleMapsApiScript(){
     const exists_script = document.body.querySelector('script#googlemaps');
     if (!exists_script){
