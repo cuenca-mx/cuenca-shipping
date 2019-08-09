@@ -32,10 +32,37 @@ export class MyComponent {
     }
   }
 
-  render() {
+  limitDate(hour) {
+    var today = new Date();
+    today.setHours(hour);
+    today.setMinutes(0);
+    today.setSeconds(0);
+    return today
+  }
+
+  systemAvailable() {
+    const now = new Date();
+    const day = now.getDay();
+    const weekend = [6,7];
+    let startDate = this.limitDate(8);
+    let endDate = this.limitDate(21);
+    if (weekend.includes(day)){
+      startDate = this.limitDate(9);
+      endDate = this.limitDate(20);
+    }
+    const from = startDate.getTime();
+    const to = endDate.getTime();
+    const nowtime = now.getTime();
+    return nowtime >= from && nowtime <= to;
+  };
+
+  render() {      
     if (this.clientId){
+      const is_available = this.systemAvailable();
       let firstComponent = 'app-step1';
-      if(localStorage.getItem("clientId") == this.clientId){
+      if (!is_available) {
+          firstComponent = 'system-available';
+      }else if(localStorage.getItem("clientId") == this.clientId){
         firstComponent = 'app-step3';
       }
       return (
@@ -52,6 +79,7 @@ export class MyComponent {
             />
             <ion-route url={window.location.pathname} component="app-step2" />
             <ion-route url={window.location.pathname} component="app-step3" />
+            <ion-route url={window.location.pathname} component="system-available" />
           </ion-router>
           <ion-nav animated={false}/>
         </ion-app>

@@ -30,6 +30,7 @@ export namespace Components {
     'clientId': string;
     'clientName': string;
   }
+  interface SystemAvailable {}
 }
 
 declare global {
@@ -64,12 +65,19 @@ declare global {
     prototype: HTMLCuencaShippingElement;
     new (): HTMLCuencaShippingElement;
   };
+
+  interface HTMLSystemAvailableElement extends Components.SystemAvailable, HTMLStencilElement {}
+  var HTMLSystemAvailableElement: {
+    prototype: HTMLSystemAvailableElement;
+    new (): HTMLSystemAvailableElement;
+  };
   interface HTMLElementTagNameMap {
     'app-header': HTMLAppHeaderElement;
     'app-step1': HTMLAppStep1Element;
     'app-step2': HTMLAppStep2Element;
     'app-step3': HTMLAppStep3Element;
     'cuenca-shipping': HTMLCuencaShippingElement;
+    'system-available': HTMLSystemAvailableElement;
   }
 }
 
@@ -95,6 +103,7 @@ declare namespace LocalJSX {
     'clientId'?: string;
     'clientName'?: string;
   }
+  interface SystemAvailable extends JSXBase.HTMLAttributes<HTMLSystemAvailableElement> {}
 
   interface IntrinsicElements {
     'app-header': AppHeader;
@@ -102,6 +111,7 @@ declare namespace LocalJSX {
     'app-step2': AppStep2;
     'app-step3': AppStep3;
     'cuenca-shipping': CuencaShipping;
+    'system-available': SystemAvailable;
   }
 }
 
