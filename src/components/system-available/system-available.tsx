@@ -23,7 +23,7 @@ export class SystemAvailable {
       	<div class="ion-text-center">
 		    <img width="250" src="/assets/img/system-available.png"/>
 		    <h2><b>Fuera de Horario</b></h2>
-		    <p>Nuestro horario de envíp de tarjetas es de {startDate} a {endDate}.</p>
+		    <p>Nuestro horario de envío de tarjetas es de {startDate} a {endDate}.</p>
         <p><b>Te invitamos a ingresar mañana nuevamente para que enviemos tu tarjeta sin problemas.</b></p>
 	    </div>  
       </ion-content>
