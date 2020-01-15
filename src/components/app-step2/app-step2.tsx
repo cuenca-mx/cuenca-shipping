@@ -300,7 +300,7 @@ export class AppStep2 {
       <ion-footer>
         <ion-list> 
           <ion-row>
-            <ion-col size="6">
+            <ion-col size="4">
               <ion-item>
                 <ion-label position="stacked">Codigo Postal
                 </ion-label>
@@ -315,13 +315,13 @@ export class AppStep2 {
                 ></ion-input>
               </ion-item>
             </ion-col>
-            <ion-col size="6">
+            <ion-col size="8">
               <ion-item>
                 <ion-label position="stacked">Nº Interior (Opcional)
                 </ion-label>
                 <ion-input
                   autofocus
-                  placeholder="Piso / Depto / etc..."
+                  placeholder="Piso / Depto / Habitacion /  etc..."
                   onInput={e => this.onInputInterior(e)}
                 ></ion-input>
               </ion-item>
