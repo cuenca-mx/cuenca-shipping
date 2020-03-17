@@ -20,6 +20,7 @@
  - [app-step1](../app-step1)
  - [app-step2](../app-step2)
  - [app-step3](../app-step3)
+ - [system-available](../system-available)
 
 ### Depends on
 
@@ -42,6 +43,7 @@ graph TD;
   app-step1 --> app-header
   app-step2 --> app-header
   app-step3 --> app-header
+  system-available --> app-header
   style app-header fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

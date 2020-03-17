@@ -137,7 +137,7 @@ export class AppStep2 {
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode(search, (results, status) => {
       if (status === google.maps.GeocoderStatus.OK) {
-          const result = this.validateAddress(results);        
+          const result = this.validateAddress(results);     
           if (result) {
             if (!dragend){    
               this.map.setCenter(result.geometry.location);
@@ -160,7 +160,7 @@ export class AppStep2 {
       const components = results[result].address_components;
       for (let component in components){
         const type = components[component]['types'][0];
-        if (types.includes(type)){
+        if (types.includes(type)){ 
           if (type == "route"){
             results[result]['dragend_required'] = true;
           }
@@ -195,6 +195,31 @@ export class AppStep2 {
 
   onInputComment = (e) => {
     this.address['comment'] = (e.target as any).value;
+  }
+
+  onInputZipCode = (e) => {
+    const zipcode = (e.target as any).value;
+    const zipcode_gmaps = this.getTypeForIvoy(
+      this.address['geocoding_gmaps'], ['postal_code']
+    )
+    if (zipcode.length == 5){
+      let geocoding_gmaps = this.address['geocoding_gmaps'];
+      if (!zipcode_gmaps){   
+        geocoding_gmaps['address_components'].push(
+          {"long_name": zipcode, "short_name": zipcode, "types": ["postal_code"]}
+        )
+      }else{
+        const components = geocoding_gmaps['address_components'];
+        for (let component in components){
+          const type = components[component]['types'][0];
+          if (type == "postal_code"){
+            components[component]['long_name'] = zipcode;
+            components[component]['short_name'] = zipcode;
+          }
+        }
+      }
+      this.setAddress(geocoding_gmaps);
+    }
   }
 
   handleClickEnd(){
@@ -245,6 +270,7 @@ export class AppStep2 {
 
   render() {
     const geocoding_gmaps = this.address['geocoding_gmaps'] || {} ;
+    const zipcode = this.getTypeForIvoy(geocoding_gmaps, ["postal_code"]);
     return [
       <ion-toast-controller></ion-toast-controller>,
       <ion-alert-controller></ion-alert-controller>,,
@@ -272,23 +298,37 @@ export class AppStep2 {
         <div id="map"></div>
       </ion-content>,
       <ion-footer>
-        <ion-list>
-          
+        <ion-list> 
           <ion-row>
-            <ion-col size="5">
+            <ion-col size="4">
+              <ion-item>
+                <ion-label position="stacked">Codigo Postal
+                </ion-label>
+                <ion-input
+                  autofocus
+                  placeholder="00000"
+                  onInput={e => this.onInputZipCode(e)}
+                  value={ zipcode }
+                  type="text"
+                  maxlength={5}
+                  disabled={zipcode ? true : false}
+                ></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="8">
               <ion-item>
                 <ion-label position="stacked">Nº Interior (Opcional)
                 </ion-label>
                 <ion-input
                   autofocus
-                  placeholder="Piso / Depto / etc..."
+                  placeholder="Piso / Depto / Habitacion /  etc..."
                   onInput={e => this.onInputInterior(e)}
                 ></ion-input>
               </ion-item>
             </ion-col>
-            <ion-col>
+            <ion-col size="12">
               <ion-item>
-                <ion-label position="stacked">Comentario
+                <ion-label>Comentario:
                 </ion-label>
                 <ion-input
                   autofocus
@@ -301,7 +341,7 @@ export class AppStep2 {
         </ion-list>   
         <ion-button
           expand="full" size="large"
-          disabled={geocoding_gmaps['dragend_required'] ? true : false}
+          disabled={geocoding_gmaps['dragend_required'] || !zipcode ? true : false}
           onClick={ () => this.handleClickEnd()}
         >Finalizar</ion-button>
       </ion-footer>
